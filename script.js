@@ -71,6 +71,22 @@ function showQuestion() {
     document.getElementById('answer_2').innerHTML = question['answer_2'];
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
+}
 
+function answer(clickedAnswer) {
+    let question = questions[currentQuestion];
+    console.log('selected answer is', clickedAnswer);
+    let selectedQuestionNumber = clickedAnswer.slice(-1);
+    console.log('selected Question Number is', selectedQuestionNumber);
+    console.log('right answer to current question is', question['right-answer']);
 
+    if ( selectedQuestionNumber == question['right-answer']) {
+        console.log('Richtige Antwort');
+        document.getElementById(clickedAnswer).parentNode.classList.add('bg-success');
+    }
+    else {
+        console.log('Falsche Antwort');
+        document.getElementById(clickedAnswer).parentNode.classList.add('bg-danger');
+    }
+    
 }
