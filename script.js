@@ -66,6 +66,9 @@ function init() {
 
 function showQuestion() {
     let question = questions[currentQuestion];
+    console.log(questions[currentQuestion]);
+    
+    document.getElementById('current_question').innerHTML = currentQuestion + 1;
     document.getElementById('question_text').innerHTML = question['question'] + "?";
     document.getElementById('answer_1').innerHTML = question['answer_1'];
     document.getElementById('answer_2').innerHTML = question['answer_2'];
@@ -75,21 +78,35 @@ function showQuestion() {
 
 function answer(clickedAnswer) {
     let question = questions[currentQuestion];
-    console.log('selected answer is', clickedAnswer);
     let selectedQuestionNumber = clickedAnswer.slice(-1); // nimmt das letzte Zeichen von clickedAnswer, also in dem Fall die Nummer der answer
-    console.log('selected Question Number is', selectedQuestionNumber);
-    console.log('right answer to current question is', question['right-answer']);
-
     let idOfRightAnswer = `answer_${question['right-answer']}`;
 
     if (selectedQuestionNumber == question['right-answer']) {
-        console.log('Richtige Antwort');
         document.getElementById(clickedAnswer).parentNode.classList.add('bg-success');
     }
     else {
-        console.log('Falsche Antwort');
         document.getElementById(clickedAnswer).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
     }
+    document.getElementById('next_button').disabled = false;
+    // document.getElementById('next_button').removeAttribute('disabled');
 
+}
+
+function nextQuestion() {
+    currentQuestion++; // erhöht um 1, also z.b. 0 + 1;
+    resetAnswerButtons();
+    showQuestion();
+}
+
+function resetAnswerButtons() {
+    document.getElementById('next_button').disabled = true;
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
