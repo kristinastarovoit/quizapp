@@ -30,3 +30,11 @@ body {
     align-items: center;
     padding-top: 12px;
 }
+
+.width-100 {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}

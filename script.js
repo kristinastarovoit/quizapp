@@ -58,6 +58,7 @@ let questions = [
 ];
 
 let currentQuestion = 0;
+let rightAnswers = 0;
 
 function init() {
     document.getElementById('all_questions').innerHTML = questions.length;
@@ -66,14 +67,22 @@ function init() {
 
 function showQuestion() {
     let question = questions[currentQuestion];
-    console.log(questions[currentQuestion]);
-    
-    document.getElementById('current_question').innerHTML = currentQuestion + 1;
-    document.getElementById('question_text').innerHTML = question['question'] + "?";
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+
+    if (currentQuestion >= questions.length) {
+        document.getElementById('endscreen').style = '';
+        document.getElementById('question_body').style = 'display: none';
+        document.getElementById('endscreen_all_questions').innerHTML = questions.length;
+        document.getElementById('endscreen_right_answers').innerHTML = rightAnswers;
+    }
+    else {
+
+        document.getElementById('current_question').innerHTML = currentQuestion + 1;
+        document.getElementById('question_text').innerHTML = question['question'] + "?";
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
 }
 
 function answer(clickedAnswer) {
@@ -83,6 +92,7 @@ function answer(clickedAnswer) {
 
     if (selectedQuestionNumber == question['right-answer']) {
         document.getElementById(clickedAnswer).parentNode.classList.add('bg-success');
+        rightAnswers++;
     }
     else {
         document.getElementById(clickedAnswer).parentNode.classList.add('bg-danger');
