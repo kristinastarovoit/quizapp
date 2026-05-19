@@ -30,14 +30,21 @@
     </nav>
     <div class="container">
 
-        <div class="card quiz-card">
 
+        <div class="card quiz-card">
             <img src="img/quiz.jpg" class="card-img-top" id="header_img">
+
+            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"
+                aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" id="progressbar_percent" style="width: 25%">25%</div>
+
+            </div>
 
             <div class="card-body" id="endscreen" style="display: none;">
                 <div class="text-center final_headline">Quiz beendet!</div>
 
-                <div class="text-center">Du hast <b id="endscreen_right_answers">XXX</b> Fragen von <b id="endscreen_all_questions">XXX</b> richtig beantwortet.</div>
+                <div class="text-center">Du hast <b id="endscreen_right_answers">XXX</b> Fragen von <b
+                        id="endscreen_all_questions">XXX</b> richtig beantwortet.</div>
             </div>
 
             <div class="card-body" id="question_body">
@@ -58,7 +65,8 @@
 
                 <div class="question-footer" id="question_footer">
                     <span><b id="current_question">1</b> von <b id="all_questions">5</b> Fragen</span>
-                    <button class="btn btn-primary" id="next_button" onclick="nextQuestion()" disabled>Nächste Frage</button>
+                    <button class="btn btn-primary" id="next_button" onclick="nextQuestion()" disabled>Nächste
+                        Frage</button>
                 </div>
 
             </div>

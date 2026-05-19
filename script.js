@@ -77,6 +77,13 @@ function showQuestion() {
     }
     else {
 
+        let percent = (currentQuestion +1) / questions.length;
+        percent = Math.round(percent * 100);
+        document.getElementById('progressbar_percent').innerHTML = `${percent} %`
+        document.getElementById('progressbar_percent').style.width = `${percent}%`
+
+        console.log(percent);
+
         document.getElementById('current_question').innerHTML = currentQuestion + 1;
         document.getElementById('question_text').innerHTML = question['question'] + "?";
         document.getElementById('answer_1').innerHTML = question['answer_1'];
