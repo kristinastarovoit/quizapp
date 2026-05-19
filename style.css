@@ -42,3 +42,9 @@ body {
     font-size: 38px;
     margin: 12px;
 }
+
+.button_row {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
