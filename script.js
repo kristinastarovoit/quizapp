@@ -73,6 +73,7 @@ function showQuestion() {
         document.getElementById('question_body').style = 'display: none';
         document.getElementById('endscreen_all_questions').innerHTML = questions.length;
         document.getElementById('endscreen_right_answers').innerHTML = rightAnswers;
+        document.getElementById('header_img').src = 'img/pokal.svg';
     }
     else {
 
