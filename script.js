@@ -116,7 +116,7 @@ function answer(clickedAnswer) {
     let selectedQuestionNumber = clickedAnswer.slice(-1); // nimmt das letzte Zeichen von clickedAnswer, also in dem Fall die Nummer der answer
     let idOfRightAnswer = `answer_${question['right-answer']}`;
 
-    if (rightAnswerSelected(selectedQuestionNumber)) {
+    if (rightAnswerSelected(selectedQuestionNumber, question)) {
         document.getElementById(clickedAnswer).parentNode.classList.add('bg-success');
         audioSuccess.play();
         rightAnswers++;
@@ -130,7 +130,7 @@ function answer(clickedAnswer) {
     // document.getElementById('next_button').removeAttribute('disabled');
 }
 
-function rightAnswerSelected(selectedQuestionNumber) {  // hier muss "selectedQuestionNumber" als Parameter übergeben werden, weil selectedQuestionNumber in einer anderen Funktion defniert ist, und von daher "weitergetragen" wird. Der Parametername ist egal, es muss nicht denselben Namen selectedQuestionNumber haben
+function rightAnswerSelected(selectedQuestionNumber, question) {  // hier muss "selectedQuestionNumber"&"question" als Parameter übergeben werden, weil selectedQuestionNumber in einer anderen Funktion defniert ist, und von daher "weitergetragen" wird. Der Parametername ist egal, es muss nicht denselben Namen selectedQuestionNumber haben
     return selectedQuestionNumber == question['right-answer'];
 }
 
