@@ -70,31 +70,45 @@ function init() {
 }
 
 function showQuestion() {
-    let question = questions[currentQuestion];
 
-    if (currentQuestion >= questions.length) {
-        document.getElementById('endscreen').style = '';
-        document.getElementById('question_body').style = 'display: none';
-        document.getElementById('endscreen_all_questions').innerHTML = questions.length;
-        document.getElementById('endscreen_right_answers').innerHTML = rightAnswers;
-        document.getElementById('header_img').src = 'img/pokal.svg';
+    if (gameIsOver()) {
+        showEndscreen();
     }
     else {
-
-        let percent = (currentQuestion + 1) / questions.length;
-        percent = Math.round(percent * 100);
-        document.getElementById('progressbar_percent').innerHTML = `${percent} %`
-        document.getElementById('progressbar_percent').style.width = `${percent}%`
-
-        console.log(percent);
-
-        document.getElementById('current_question').innerHTML = currentQuestion + 1;
-        document.getElementById('question_text').innerHTML = question['question'] + "?";
-        document.getElementById('answer_1').innerHTML = question['answer_1'];
-        document.getElementById('answer_2').innerHTML = question['answer_2'];
-        document.getElementById('answer_3').innerHTML = question['answer_3'];
-        document.getElementById('answer_4').innerHTML = question['answer_4'];
+        updateProgressBar();
+        updateToNextQuestion();
     }
+}
+
+function gameIsOver() {
+    return currentQuestion >= questions.length;
+}
+
+function updateToNextQuestion() {
+    updateProgressBar();
+    let question = questions[currentQuestion];
+
+    document.getElementById('current_question').innerHTML = currentQuestion + 1;
+    document.getElementById('question_text').innerHTML = question['question'] + "?";
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
+}
+
+function showEndscreen() {
+    document.getElementById('endscreen').style = '';
+    document.getElementById('question_body').style = 'display: none';
+    document.getElementById('endscreen_all_questions').innerHTML = questions.length;
+    document.getElementById('endscreen_right_answers').innerHTML = rightAnswers;
+    document.getElementById('header_img').src = 'img/pokal.svg';
+}
+
+function updateProgressBar() {
+    let percent = (currentQuestion + 1) / questions.length;
+    percent = Math.round(percent * 100);
+    document.getElementById('progressbar_percent').innerHTML = `${percent} %`
+    document.getElementById('progressbar_percent').style.width = `${percent}%`
 }
 
 function answer(clickedAnswer) {
@@ -102,7 +116,7 @@ function answer(clickedAnswer) {
     let selectedQuestionNumber = clickedAnswer.slice(-1); // nimmt das letzte Zeichen von clickedAnswer, also in dem Fall die Nummer der answer
     let idOfRightAnswer = `answer_${question['right-answer']}`;
 
-    if (selectedQuestionNumber == question['right-answer']) {
+    if (rightAnswerSelected(selectedQuestionNumber)) {
         document.getElementById(clickedAnswer).parentNode.classList.add('bg-success');
         audioSuccess.play();
         rightAnswers++;
@@ -114,7 +128,10 @@ function answer(clickedAnswer) {
     }
     document.getElementById('next_button').disabled = false;
     // document.getElementById('next_button').removeAttribute('disabled');
+}
 
+function rightAnswerSelected(selectedQuestionNumber) {  // hier muss "selectedQuestionNumber" als Parameter übergeben werden, weil selectedQuestionNumber in einer anderen Funktion defniert ist, und von daher "weitergetragen" wird. Der Parametername ist egal, es muss nicht denselben Namen selectedQuestionNumber haben
+    return selectedQuestionNumber == question['right-answer'];
 }
 
 function nextQuestion() {
